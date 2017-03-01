@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1A523192D85E42B1A5CEF749 /* libPods-LineDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4518F99D30D54E38B27E5E3 /* libPods-LineDemoTests.a */; };
-		8B4103D01E6543AA00163450 /* DayDataModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4103CF1E6543AA00163450 /* DayDataModelManager.m */; };
 		8B4103DC1E655F2F00163450 /* KLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4103DB1E655F2F00163450 /* KLineView.m */; };
 		8B4103DF1E656DA800163450 /* CandlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4103DE1E656DA800163450 /* CandlesView.m */; };
 		8B4103E21E656DC200163450 /* LinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4103E11E656DC200163450 /* LinesView.m */; };
 		8B4103E51E658ABA00163450 /* getData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4103E41E658ABA00163450 /* getData.m */; };
 		8B8E87E91E63C037000C219D /* UIColor+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E87E81E63C037000C219D /* UIColor+helper.m */; };
-		8B8E87EE1E63FC66000C219D /* DayDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E87ED1E63FC66000C219D /* DayDataModel.m */; };
 		8BD1DD081E603733009FE2E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD1DD071E603733009FE2E2 /* main.m */; };
 		8BD1DD0B1E603733009FE2E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD1DD0A1E603733009FE2E2 /* AppDelegate.m */; };
 		8BD1DD0E1E603733009FE2E2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD1DD0D1E603733009FE2E2 /* ViewController.m */; };
@@ -52,8 +50,6 @@
 		6388B0E588BD5B035967B648 /* Pods-LineDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LineDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LineDemoUITests/Pods-LineDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		741E2DBA1A07B14EFEADE280 /* Pods-LineDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LineDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LineDemo/Pods-LineDemo.release.xcconfig"; sourceTree = "<group>"; };
 		81D75A37EB1A099D572F39E7 /* libPods-LineDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LineDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B4103CE1E6543AA00163450 /* DayDataModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayDataModelManager.h; sourceTree = "<group>"; };
-		8B4103CF1E6543AA00163450 /* DayDataModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayDataModelManager.m; sourceTree = "<group>"; };
 		8B4103DA1E655F2F00163450 /* KLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLineView.h; sourceTree = "<group>"; };
 		8B4103DB1E655F2F00163450 /* KLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLineView.m; sourceTree = "<group>"; };
 		8B4103DD1E656DA800163450 /* CandlesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandlesView.h; sourceTree = "<group>"; };
@@ -65,8 +61,6 @@
 		8B8E87E71E63C037000C219D /* UIColor+helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+helper.h"; sourceTree = "<group>"; };
 		8B8E87E81E63C037000C219D /* UIColor+helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+helper.m"; sourceTree = "<group>"; };
 		8B8E87EB1E63F5DC000C219D /* LineDemo.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineDemo.pch; sourceTree = "<group>"; };
-		8B8E87EC1E63FC66000C219D /* DayDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayDataModel.h; sourceTree = "<group>"; };
-		8B8E87ED1E63FC66000C219D /* DayDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayDataModel.m; sourceTree = "<group>"; };
 		8BD1DD031E603733009FE2E2 /* LineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD1DD071E603733009FE2E2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8BD1DD091E603733009FE2E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -207,10 +201,6 @@
 				8BD1DD071E603733009FE2E2 /* main.m */,
 				8B8E87E71E63C037000C219D /* UIColor+helper.h */,
 				8B8E87E81E63C037000C219D /* UIColor+helper.m */,
-				8B8E87EC1E63FC66000C219D /* DayDataModel.h */,
-				8B8E87ED1E63FC66000C219D /* DayDataModel.m */,
-				8B4103CE1E6543AA00163450 /* DayDataModelManager.h */,
-				8B4103CF1E6543AA00163450 /* DayDataModelManager.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -500,7 +490,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B4103D01E6543AA00163450 /* DayDataModelManager.m in Sources */,
 				8BD1DD0E1E603733009FE2E2 /* ViewController.m in Sources */,
 				8BD1DD0B1E603733009FE2E2 /* AppDelegate.m in Sources */,
 				8B8E87E91E63C037000C219D /* UIColor+helper.m in Sources */,
@@ -508,7 +497,6 @@
 				8B4103DC1E655F2F00163450 /* KLineView.m in Sources */,
 				8B4103E51E658ABA00163450 /* getData.m in Sources */,
 				8BD1DD141E603733009FE2E2 /* LineDemo.xcdatamodeld in Sources */,
-				8B8E87EE1E63FC66000C219D /* DayDataModel.m in Sources */,
 				8BD86F391E6672FD00AD4666 /* commond.m in Sources */,
 				8B4103E21E656DC200163450 /* LinesView.m in Sources */,
 				8BD1DD081E603733009FE2E2 /* main.m in Sources */,

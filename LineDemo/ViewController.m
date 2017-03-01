@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor colorWithHexString:@"#111111" withAlpha:1];
     KLineView *lineView = [[KLineView alloc]init];
-    lineView.frame = CGRectMake(0, 100, 300, 200);
+    lineView.frame = CGRectMake(0, 100, 300, 450);
     [self.view addSubview:lineView];
     [lineView start];
     

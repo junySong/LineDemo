@@ -8,6 +8,7 @@
 #define LefePad 50 //框框距离左边距
 #define RightPad 20 //框框距离右边距
 #import "KLineView.h"
+#import "LinesView.h"
 
 
 @interface  KLineView()<UIScrollViewDelegate>{
@@ -80,7 +81,7 @@
 - (void)drawBox{
     //画个K线图的框框
     if (_mainBoxView == nil) {
-        _mainBoxView = [[UIView alloc] initWithFrame:CGRectMake(LefePad, 20, self.frame.size.width-LefePad-RightPad, self.frame.size.height- 20)];
+        _mainBoxView = [[UIView alloc] initWithFrame:CGRectMake(LefePad, 20, self.frame.size.width-LefePad-RightPad, self.frame.size.height- 40)];
         _mainBoxView.backgroundColor = [UIColor colorWithHexString:@"#222222" withAlpha:1];
         _mainBoxView.layer.borderColor = [UIColor colorWithHexString:@"#444444" withAlpha:1].CGColor;
         _mainBoxView.layer.borderWidth = 0.5;
@@ -123,20 +124,14 @@
 //        getdata.kCount = self.data.count;
         self.category = getdata.category;
         NSLog(@"当前：%i",self.data.count);
-//        [self drawLabels];
+
         // 开始画K线图
         [self drawBoxWithKline];
         
 
     });
     NSLog(@"处理得dddd");
-    // 清除旧的k线
-//    if (lineOldArray.count>0 && _isUpdata) {
-//        for (LinesView *line in lineOldArray) {
-//            [line removeFromSuperview];
-//        }
-//    }
-//    lineOldArray = lineArray.copy;
+    
     [_thread cancel];
 }
 
@@ -145,18 +140,14 @@
     CGFloat minY = _mainBoxView.frame.origin.y;
     CGFloat startX = 10;
     UIColor *color = [UIColor colorWithHexString:@"0x565a64"];
+    if (getdata == nil) {
+        return;
+    }
    
     //画最小值的标签
     NSString *minLabelString = [NSString stringWithFormat:@"%.3f",getdata.minValue];
     CGPoint pointMin = CGPointMake(startX, maxY-5);
     [minLabelString drawAtPoint:pointMin withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11],NSForegroundColorAttributeName :color} ];
-//    UILabel *label = [self getlabel];
-//    label.frame = CGRectMake(pointMin.x, pointMin.y, 50, 13);
-//    [self addSubview:label];
-//    label.text = minLabelString;
-//    
-//    label.backgroundColor = [UIColor yellowColor];
-//    [label autoresizesSubviews];
 //    
     //画最大值的标签
     NSString *maxLabelString = [NSString stringWithFormat:@"%.3f",getdata.maxValue];
@@ -164,12 +155,12 @@
     [ maxLabelString drawAtPoint:pointMax withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11],NSForegroundColorAttributeName :color} ];
     
     CGFloat divideCount = (getdata.maxValue - getdata.minValue)/PartationCount;
-    CGFloat dividePosition = (maxY-maxY)/PartationCount;
+    CGFloat dividePosition = ((maxY-minY)*1.0)/PartationCount;
     
     //从上往下开始画标签
     for (int i = 1; i<PartationCount; i++) {
         NSString *LabelString = [NSString stringWithFormat:@"%.3f",(getdata.maxValue - i*divideCount)];
-        CGPoint point = CGPointMake(startX, minY + i*dividePosition-5);
+        CGPoint point = CGPointMake(startX, (minY + (i*dividePosition))-5);
         [LabelString drawAtPoint:point withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11],NSForegroundColorAttributeName :color} ];
     
     }
@@ -183,11 +174,35 @@
     NSArray *ktempArray = [self changeKPointWithData:getdata.data]; // 换算成实际每天收盘价坐标数组
     CGSize size = CGSizeMake((KPad+KCandleWidth)*ktempArray.count, _mainBoxView.frame.size.height);
     _mainScrollView.contentSize = size;
+    //画阴阳烛线图
     CandlesView *kline = [[CandlesView alloc] initWithFrame:CGRectMake(0, 0, size.width, _mainBoxView.frame.size.height)];
     kline.pointArray = ktempArray;
     [_mainScrollView addSubview:kline];
     [_candlesArray addObject:kline];
+    //画各种分时线图
+    [self drawMAWithIndex:5 andColor:@"#FFFFFF"];
+    // MA10
+    [self drawMAWithIndex:6 andColor:@"#FF99OO"];
+    // MA20
+    [self drawMAWithIndex:7 andColor:@"#FF00FF"];
+    
+    
+    //调用drawRect方法,主要是为了绘制左侧的label
+    [self setNeedsDisplay];
 }
+
+#pragma mark 画各种均线
+-(void)drawMAWithIndex:(int)index andColor:(NSString*)color{
+    NSArray *tempArray = [self changePointWithData:getdata.data andMA:index]; // 换算成实际坐标数组
+    LinesView *line = [[LinesView alloc] initWithFrame:CGRectMake(0, 0, _mainScrollView.contentSize.width,_mainBoxView.frame.size.height)];
+    line.lineColor = [UIColor colorWithHexString:color];
+    line.pointsArray = tempArray;
+  
+    [_mainScrollView addSubview:line];
+    
+    [_linesArray addObject:line];
+}
+
 #pragma mark 把股市数据换算成实际的点坐标数组
 -(NSArray*)changeKPointWithData:(NSArray*)data{
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -225,16 +240,29 @@
         //[pointArray addObject:[NSNumber numberWithFloat:PointStartX]];
         currentArray = Nil;
         PointStartX += KCandleWidth + KPad; // 生成下一个点的x轴
-        
-        // 在成交量视图左右下方显示开始和结束日期
-//        if ([data indexOfObject:item]==0) {
-//            startDateLab.text = [self.category objectAtIndex:[data indexOfObject:item]];
-//        }
-//        if ([data indexOfObject:item]==data.count-1) {
-//            endDateLab.text = [self.category objectAtIndex:[data indexOfObject:item]];
-//        }
     }
     _pointArray = tempArray;
+    return tempArray;
+}
+
+
+#pragma mark 把股市数据换算成实际的点坐标数组  MA = 5 为MA5 MA=6 MA10  MA7 = MA20
+-(NSArray*)changePointWithData:(NSArray*)data andMA:(int)MAIndex{
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    CGFloat PointStartX = 0.0f; // 起始点坐标
+    for (NSArray *item in data) {
+        CGFloat currentValue = [[item objectAtIndex:MAIndex] floatValue];// 得到前五天的均价价格
+        // 换算成实际的坐标
+        CGSize boxSize = _mainBoxView.frame.size;
+        CGFloat boxMaxY = _mainBoxView.frame.origin.y + boxSize.height;
+        
+        CGFloat diviceNumber = boxSize.height/(getdata.maxValue - getdata.minValue);//单位数值代表的长度
+        CGFloat currentPointY = boxSize.height - ((currentValue - getdata.minValue)*diviceNumber);
+
+        CGPoint currentPoint =  CGPointMake(PointStartX, currentPointY); // 换算到当前的坐标值
+        [tempArray addObject:NSStringFromCGPoint(currentPoint)]; // 把坐标添加进新数组
+        PointStartX += (KCandleWidth+KPad); // 生成下一个点的x轴
+    }
     return tempArray;
 }
 
@@ -329,11 +357,7 @@
     return url;
 }
 
-- (UILabel*)getlabel{
-    UILabel *label = [[UILabel alloc]init];
-    label.font = [UIFont systemFontOfSize:11];
-    return label;
-}
+
 - (void)dealloc{
     _thread = nil;
 }
