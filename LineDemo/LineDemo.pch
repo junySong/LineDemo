@@ -1,0 +1,22 @@
+//
+//  LineDemo.pch
+//  LineDemo
+//
+//  Created by 宋俊红 on 17/2/27.
+//  Copyright © 2017年 Juny_song. All rights reserved.
+//
+
+#ifndef LineDemo_pch
+#define LineDemo_pch
+
+#import "UIColor+helper.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "ASIHTTPRequest.h"
+
+#define KCandleWidth 10
+#define KLineWidth 2
+#define KPad 3
+#define PartationCount  6
+#endif /* LineDemo_pch */
