@@ -249,15 +249,20 @@
 #pragma mark 把股市数据换算成实际的点坐标数组  MA = 5 为MA5 MA=6 MA10  MA7 = MA20
 -(NSArray*)changePointWithData:(NSArray*)data andMA:(int)MAIndex{
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    CGFloat PointStartX = 0.0f; // 起始点坐标
+    CGFloat PointStartX = (KCandleWidth+KPad); // 起始点坐标
     for (NSArray *item in data) {
         CGFloat currentValue = [[item objectAtIndex:MAIndex] floatValue];// 得到前五天的均价价格
         // 换算成实际的坐标
         CGSize boxSize = _mainBoxView.frame.size;
         CGFloat boxMaxY = _mainBoxView.frame.origin.y + boxSize.height;
         
-        CGFloat diviceNumber = boxSize.height/(getdata.maxValue - getdata.minValue);//单位数值代表的长度
+        CGFloat diviceNumber = boxSize.height/(getdata.maxValue - getdata.minValue);//单位数值Y轴的长度
         CGFloat currentPointY = boxSize.height - ((currentValue - getdata.minValue)*diviceNumber);
+        if (currentPointY >= boxSize.height) {
+            currentPointY = currentPointY;
+        }else if (currentPointY<=0){
+             currentPointY = 0;
+        }
 
         CGPoint currentPoint =  CGPointMake(PointStartX, currentPointY); // 换算到当前的坐标值
         [tempArray addObject:NSStringFromCGPoint(currentPoint)]; // 把坐标添加进新数组

@@ -70,7 +70,11 @@
     
     CGContextSetStrokeColorWithColor(context, [color CGColor]);
     
-
+    // 首先画一个垂直的线包含上影线和下影线
+    // 定义两个点 画两点连线
+    CGContextSetLineWidth(context, KLineWidth);
+    const CGPoint points[] = {heightPoint,lowPoint};
+    CGContextStrokeLineSegments(context, points, 2);  // 绘制线段（默认不绘制端点）
     // 再画中间的实体
    
     CGFloat halfWidth = 0;
@@ -84,20 +88,13 @@
 //    CGContextSetLineCap(context, kCGLineCapSquare) ;// 设置线段的端点形状，方形
     //开盘价格和收盘价格一样，画一条横线
     if ((openPoint.y-closePoint.y<=1) && (closePoint.y-openPoint.y<=1) ) {
-        
-        
+        //这里设置开盘价和收盘价一样时候的颜色 CGContextSetStrokeColorWithColor(context, [color CGColor]);
         CGPoint pointLeft = CGPointMake(openPoint.x-KCandleWidth/2, openPoint.y);
         CGPoint pointRight = CGPointMake(openPoint.x+KCandleWidth/2, openPoint.y);
         CGContextSetLineWidth(context, 1); // 改变线的宽度
         const CGPoint point[] = {pointLeft,pointRight};
         CGContextStrokeLineSegments(context, point, 2);  // 绘制线段（默认不绘制端点）
     }
-    
-    // 首先画一个垂直的线包含上影线和下影线
-    // 定义两个点 画两点连线
-    CGContextSetLineWidth(context, KLineWidth);
-    const CGPoint points[] = {heightPoint,lowPoint};
-    CGContextStrokeLineSegments(context, points, 2);  // 绘制线段（默认不绘制端点）
   
 }
 

@@ -49,11 +49,11 @@
         
         for (id item in self.pointsArray) {
             CGPoint currentPoint = CGPointFromString(item);
-            if ((int)currentPoint.y<(int)self.frame.size.height && currentPoint.y>0) {
-//                if ([self.pointsArray indexOfObject:item]==0) {
-//                    CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);
-//                    continue;
-//                }
+            if ((int)currentPoint.y<=(int)self.frame.size.height && currentPoint.y>=0) {
+                if ([self.pointsArray indexOfObject:item]==0) {
+                    CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);//这个是起始点
+                    continue;
+                }
                 CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
                 CGContextStrokePath(context); //开始画线
                 if ([self.pointsArray indexOfObject:item]<self.pointsArray.count) {
