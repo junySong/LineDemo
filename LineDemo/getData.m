@@ -79,6 +79,9 @@
             continue;
         }
         NSArray   *arr = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+        if (arr&&arr.count<=5) {
+            return;
+        }
         // 收盘价的最小值和最大值
         if ([[arr objectAtIndex:2] floatValue]>self.maxValue) {
             self.maxValue = [[arr objectAtIndex:2] floatValue];
